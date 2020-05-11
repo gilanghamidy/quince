@@ -46,6 +46,8 @@ public:
         return quince::make_unique<mapping_customization>(*this);
     }
 
+    virtual ~mapping_customization() { }
+
 private:
     friend class mapper_factory;
 
@@ -77,6 +79,6 @@ private:
     std::unordered_map<std::type_index, maker> _custom_makers;
 };
 
-};
+}
 
 #endif

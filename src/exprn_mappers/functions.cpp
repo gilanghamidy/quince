@@ -18,10 +18,10 @@ using std::string;
 namespace quince {
 
 namespace {
-    QUINCE_DEFINE_SERVER_ONLY_TYPE(asterisk);  // pseudo-type for the "*" in "COUNT(*)"
+    QUINCE_DEFINE_SERVER_ONLY_TYPE(asterisk)  // pseudo-type for the "*" in "COUNT(*)"
 
-    QUINCE_DEFINE_SERVER_ONLY_TYPE(any_sum);  // what the server makes when it sums stuff.  It may or may not be some normal type, but it depends on arg and dbms, so I pretend it's not normal.
-	QUINCE_DEFINE_SERVER_ONLY_TYPE(any_avg);  // what the server makes when it averages stuff.  In fact it's some normal type, but it depends on arg and dbms, so I pretend it's not normal.
+    QUINCE_DEFINE_SERVER_ONLY_TYPE(any_sum)  // what the server makes when it sums stuff.  It may or may not be some normal type, but it depends on arg and dbms, so I pretend it's not normal.
+	QUINCE_DEFINE_SERVER_ONLY_TYPE(any_avg)  // what the server makes when it averages stuff.  In fact it's some normal type, but it depends on arg and dbms, so I pretend it's not normal.
 
 	template<typename T>
 	exprn_mapper<optional<double>>

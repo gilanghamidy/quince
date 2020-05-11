@@ -178,7 +178,7 @@ private:
         std::get<I>(_member_mappers)->from_row(src, std::get<I>(dest));
         from_row_helper(src, dest, counter_tag<I+1>());
     }
-    void from_row_helper(const row &src, value_type &dest, counter_tag<N>) const  {}
+    void from_row_helper(const row &, value_type &, counter_tag<N>) const  {}
 
 
     template<size_t I>
@@ -187,7 +187,7 @@ private:
         std::get<I>(_member_mappers)->to_row(std::get<I>(src), dest);
         to_row_helper(src, dest, counter_tag<I+1>());
     }
-    void to_row_helper(const value_type &src, row &dest, counter_tag<N>) const  {}
+    void to_row_helper(const value_type &, row &, counter_tag<N>) const  {}
 
 
     template<size_t I>

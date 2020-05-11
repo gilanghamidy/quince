@@ -20,6 +20,7 @@ namespace quince {
 class cloneable {
 public:
     virtual std::unique_ptr<cloneable> clone_impl() const = 0;
+    virtual inline ~cloneable() { };
 };
 
 

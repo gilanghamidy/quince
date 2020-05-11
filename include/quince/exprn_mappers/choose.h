@@ -73,7 +73,7 @@ unique_case_clause
 clone_parts(const case_clause<When, Then> &c) {
     std::unique_ptr<const abstract_mapper_base> w;
     if (c._when)  w = clone(*c._when);
-    return std::move(unique_case_clause(std::move(w), clone(*c._then)));
+    return { std::move(w), clone(*c._then) };
 }
 
 template<typename When, typename Then>

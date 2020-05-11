@@ -48,7 +48,7 @@ public:
     create(const boost::optional<std::string> &name) const {
         for (const mapping_customization *customization: _customization)
             if (std::unique_ptr<abstract_mapper<T>> m = customization->create<T>(name, *this))
-                return std::move(m);
+                return m;
         abort();
     }
 

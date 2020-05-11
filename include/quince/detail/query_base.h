@@ -145,7 +145,7 @@ public:
     // the SQL for this query, it would be advantageous if the SQL context had already
     // defined an SQL column alias for c.
     //
-    column_id_set imports() const;
+    column_id_set imports() const override;
 
     virtual std::unique_ptr<const query_base> selectable_equivalent() const = 0;
 

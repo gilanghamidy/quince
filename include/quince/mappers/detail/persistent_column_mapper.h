@@ -38,7 +38,7 @@ public:
 
     virtual void for_each_persistent_column(std::function<void(const persistent_column_mapper &)>) const override;
 
-    virtual void write_expression(sql &) const;
+    virtual void write_expression(sql &) const override;
 
     void check_compatibility(const database &) const;
 

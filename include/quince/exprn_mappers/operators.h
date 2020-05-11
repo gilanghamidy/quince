@@ -17,11 +17,11 @@ namespace quince {
 #ifdef __GNUC__
   static const char * const plus = "+";
   static const char * const dash = "-";
-  QUINCE_OVERLOAD_UNARY_OPERATOR(+, endomorphic_prefix_op{plus});
-  QUINCE_OVERLOAD_UNARY_OPERATOR(-, endomorphic_prefix_op{dash});
+  QUINCE_OVERLOAD_UNARY_OPERATOR(+, endomorphic_prefix_op{plus})
+  QUINCE_OVERLOAD_UNARY_OPERATOR(-, endomorphic_prefix_op{dash})
 #else
-  QUINCE_OVERLOAD_UNARY_OPERATOR(+, endomorphic_prefix_op{"+"});
-  QUINCE_OVERLOAD_UNARY_OPERATOR(-, endomorphic_prefix_op{"-"});
+  QUINCE_OVERLOAD_UNARY_OPERATOR(+, endomorphic_prefix_op{"+"})
+  QUINCE_OVERLOAD_UNARY_OPERATOR(-, endomorphic_prefix_op{"-"})
 #endif
 
 struct addition_op : public endomorphic_infix_op {
@@ -76,19 +76,19 @@ QUINCE_OVERLOAD_BINARY_OPERATOR(+, addition_op())
   QUINCE_OVERLOAD_BINARY_OPERATOR(|, endomorphic_infix_op{"|"})
 #endif
 
-QUINCE_OVERLOAD_BINARY_OPERATOR(==, (lexicographic_comparison_op{relation::equal, relation::equal}));
-QUINCE_OVERLOAD_BINARY_OPERATOR(!=, (lexicographic_comparison_op{relation::not_equal, relation::not_equal}));
-QUINCE_OVERLOAD_BINARY_OPERATOR(<,  (lexicographic_comparison_op{relation::less, relation::greater}));
-QUINCE_OVERLOAD_BINARY_OPERATOR(>,  (lexicographic_comparison_op{relation::greater, relation::less}));
-QUINCE_OVERLOAD_BINARY_OPERATOR(<=, (lexicographic_comparison_op{relation::less_or_equal, relation::greater_or_equal}));
-QUINCE_OVERLOAD_BINARY_OPERATOR(>=, (lexicographic_comparison_op{relation::greater_or_equal, relation::less_or_equal}));
+QUINCE_OVERLOAD_BINARY_OPERATOR(==, (lexicographic_comparison_op{relation::equal, relation::equal}))
+QUINCE_OVERLOAD_BINARY_OPERATOR(!=, (lexicographic_comparison_op{relation::not_equal, relation::not_equal}))
+QUINCE_OVERLOAD_BINARY_OPERATOR(<,  (lexicographic_comparison_op{relation::less, relation::greater}))
+QUINCE_OVERLOAD_BINARY_OPERATOR(>,  (lexicographic_comparison_op{relation::greater, relation::less}))
+QUINCE_OVERLOAD_BINARY_OPERATOR(<=, (lexicographic_comparison_op{relation::less_or_equal, relation::greater_or_equal}))
+QUINCE_OVERLOAD_BINARY_OPERATOR(>=, (lexicographic_comparison_op{relation::greater_or_equal, relation::less_or_equal}))
 
-QUINCE_OVERLOAD_BINARY_OPERATOR(==, (collective_comparison_op{relation::equal, relation::equal}));
-QUINCE_OVERLOAD_BINARY_OPERATOR(!=, (collective_comparison_op{relation::not_equal, relation::not_equal}));
-QUINCE_OVERLOAD_BINARY_OPERATOR(<,  (collective_comparison_op{relation::less, relation::greater}));
-QUINCE_OVERLOAD_BINARY_OPERATOR(>,  (collective_comparison_op{relation::greater, relation::less}));
-QUINCE_OVERLOAD_BINARY_OPERATOR(<=, (collective_comparison_op{relation::less_or_equal, relation::greater_or_equal}));
-QUINCE_OVERLOAD_BINARY_OPERATOR(>=, (collective_comparison_op{relation::greater_or_equal, relation::less_or_equal}));
+QUINCE_OVERLOAD_BINARY_OPERATOR(==, (collective_comparison_op{relation::equal, relation::equal}))
+QUINCE_OVERLOAD_BINARY_OPERATOR(!=, (collective_comparison_op{relation::not_equal, relation::not_equal}))
+QUINCE_OVERLOAD_BINARY_OPERATOR(<,  (collective_comparison_op{relation::less, relation::greater}))
+QUINCE_OVERLOAD_BINARY_OPERATOR(>,  (collective_comparison_op{relation::greater, relation::less}))
+QUINCE_OVERLOAD_BINARY_OPERATOR(<=, (collective_comparison_op{relation::less_or_equal, relation::greater_or_equal}))
+QUINCE_OVERLOAD_BINARY_OPERATOR(>=, (collective_comparison_op{relation::greater_or_equal, relation::less_or_equal}))
 
 
 predicate operator&&(const abstract_predicate &lhs, const abstract_predicate &rhs);

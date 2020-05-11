@@ -60,7 +60,7 @@ public:
     }
 
     virtual column_type
-    get_column_type(bool is_generated) const override {
+    get_column_type(bool) const override {
         return quince::get_column_type<CxxType>();
     }
 

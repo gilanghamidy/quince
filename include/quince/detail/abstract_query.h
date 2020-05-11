@@ -6,6 +6,7 @@
 //    (See accompanying file ../../../LICENSE_1_0.txt or copy at
 //          http://www.boost.org/LICENSE_1_0.txt)
 
+#include <quince/database.h>
 #include <quince/detail/abstract_query_base.h>
 #include <quince/detail/util.h>
 #include <quince/mappers/detail/exposed_mapper_type.h>
@@ -30,7 +31,7 @@ enum class conditional_junction_type { inner, left, right, full };
 //
 // See the discussion at http://quince-lib.com/queries.html.
 //
-// The doco says "I use the noun “query”, in normal font, for objects of various C++ types"
+// The doco says "I use the noun ï¿½queryï¿½, in normal font, for objects of various C++ types"
 // (i.e. the types just listed).  Here in the code I don't have a normal font, so I use the
 // word "query" for class query only.  When I want to speak of queries in normal-font sense,
 // I will say "abstract_query".

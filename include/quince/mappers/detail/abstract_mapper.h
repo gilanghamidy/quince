@@ -80,7 +80,7 @@ inline bool
 a_priori_false(const abstract_predicate &pred) {
     const bool could_be_true = pred.a_priori_value().get_value_or(true);
     return ! could_be_true;
-};
+}
 
 }
 

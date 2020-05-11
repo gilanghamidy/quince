@@ -14,7 +14,6 @@
 #include <quince/detail/object_owner.h>
 #include <quince/detail/row.h>
 #include <quince/detail/session.h>
-#include <quince/database.h>
 #include <quince/mapping_customization.h>
 #include <quince/serial.h>
 

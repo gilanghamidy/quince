@@ -318,12 +318,12 @@ make_new_mappers_checked(const Xs &...xs) {
 #define QUINCE_DEFINE_SERVER_ONLY_TYPE(NAME) \
     struct NAME {}; \
     \
-    quince::column_type \
+    [[maybe_unused]] quince::column_type \
     inline QUINCE_get_column_type_via_adl(NAME *) { \
         throw server_only_exception(); \
     } \
     \
-    inline void \
+    [[maybe_unused]] inline void \
     QUINCE_from_cell_via_adl(const quince::database &, const quince::cell &, NAME &) { \
         throw server_only_exception(); \
     }

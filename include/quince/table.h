@@ -129,6 +129,13 @@ public:
         general_table<Value>(db, name, ptkm, mc)
     {}
 
+    table(
+        const database& db,
+        const boost::optional<mapping_customization > &mc = boost::none
+    ) :
+        table(db, std::string { Value::table_name }, Value::primary_key, mc)
+    {} // TODO Modify all const string to string_view
+
     void
     insert(const Value &value) {
         row input(& this->get_database());
@@ -183,6 +190,13 @@ public:
         _ptr_to_key_member = ptr_to_key_member;
     }
 
+    serial_table(
+        const database& db,
+        const boost::optional<mapping_customization> &mc = boost::none
+    ) :
+        serial_table(db, std::string { Value::table_name }, Value::primary_key, mc)
+    { } // TODO Modify all const string to string_view
+
     serial
     insert(const Value &value) {
         row input(&this->get_database());
@@ -207,7 +221,7 @@ public:
     // --- Everything from here to end of class is for quince internal use only. ---
 
     const serial_mapper *
-    readback_mapper() const {
+    readback_mapper() const override {
         return dynamic_cast<const serial_mapper *>(&this->get_key_mapper_base());
     }
 

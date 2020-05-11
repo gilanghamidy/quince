@@ -40,6 +40,7 @@ protected:
         std::unique_ptr<const table_base> table,
         const Value *
     ) :
+        object_owner { },
         _name(generate_name()),
         _table(own(table)),
         _value_mapper(own(make_value_mapper<Value>()))

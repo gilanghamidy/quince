@@ -158,7 +158,7 @@ sql::write_evaluation(const column_mapper &column) {
 }
 
 string
-sql::next_value_reference(const cell &value) {
+sql::next_value_reference(const cell &) {
     return next_placeholder();
 }
 
@@ -330,7 +330,7 @@ sql::write_extrinsic_comparison(relation r, const abstract_column_sequence &lhs,
 
         const cell &value = *rhs.find_cell(c.name());
         const string r = next_value_reference(value);
-        rhs_thunks.push_back([=](sql &cmd) {
+        rhs_thunks.push_back([=, this](sql &) {
             write(r);
         });
         attach_value(value);
@@ -340,7 +340,7 @@ sql::write_extrinsic_comparison(relation r, const abstract_column_sequence &lhs,
 }
 
 void
-sql::write_collective_comparison(relation r, const abstract_column_sequence &lhs, const collective_base &rhs) {
+sql::write_collective_comparison(relation, const abstract_column_sequence &, const collective_base &) {
     throw unsupported_exception();
 }
 
@@ -357,7 +357,7 @@ sql::write_distinct() {
 }
 
 void
-sql::write_returning(const abstract_mapper_base &mapper) {
+sql::write_returning(const abstract_mapper_base &) {
     throw unsupported_exception();
 }
 
@@ -559,28 +559,28 @@ sql::write_rename_table(const binomen &old, const string &new_local) {
 
 void
 sql::write_add_columns(
-    const binomen &table,
-    const abstract_mapper_base &mapper,
-    optional<column_id> generated_key
+    const binomen &,
+    const abstract_mapper_base &,
+    optional<column_id> 
 ) {
     throw unsupported_exception();
 }
 
 void
-sql::write_drop_columns(const binomen &table, const abstract_mapper_base &mapper) {
+sql::write_drop_columns(const binomen &, const abstract_mapper_base &) {
     throw unsupported_exception();
 }
 
 void
-sql::write_rename_column(const binomen &table, const string &before, const string &after) {
+sql::write_rename_column(const binomen &, const string &, const string &) {
     throw unsupported_exception();
 }
 
 void
 sql::write_set_columns_types(
-    const binomen &table,
-    const abstract_mapper_base &mapper,
-    optional<column_id> generated_key
+    const binomen &,
+    const abstract_mapper_base &,
+    optional<column_id> 
 ) {
     throw unsupported_exception();
 }

@@ -1,0 +1,19 @@
+target_sources(quince PRIVATE
+        cast.cpp
+        choose.cpp
+        collective_comparison.cpp
+        collective.cpp
+        constant.cpp
+        "exists.cpp"
+        exprn_mapper.cpp
+        "function.cpp"
+        functions.cpp
+        in.cpp
+        infix.cpp
+        is_null.cpp
+        lexicographic_comparison.cpp
+        operators.cpp
+        postfix.cpp
+        prefix.cpp
+        scalar.cpp
+)

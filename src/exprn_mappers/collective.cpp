@@ -12,7 +12,7 @@ using std::unique_ptr;
 
 namespace quince {
 
-const collective_type
+collective_type
 collective_base::get_type() const {
     return _type;
 }
@@ -28,6 +28,6 @@ collective_base::collective_base(
 ) :
     _type(type),
     _query(&own(query))
-{};
+{}
 
 }

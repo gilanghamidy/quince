@@ -23,7 +23,7 @@ enum class collective_type { all, some };
 
 class collective_base : public cloneable, private object_owner {
 public:
-    const collective_type get_type() const;
+    collective_type get_type() const;
     const query_base &get_query() const;
 
 protected:

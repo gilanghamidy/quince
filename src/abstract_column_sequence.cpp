@@ -44,7 +44,7 @@ abstract_column_sequence::only_column() const {
 size_t
 abstract_column_sequence::size() const {
     size_t result = 0;
-    for_each_column([&](const column_mapper &c) {
+    for_each_column([&](const column_mapper &) {
         result++;
     });
     return result;

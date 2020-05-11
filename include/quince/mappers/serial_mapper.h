@@ -39,6 +39,13 @@ public:
     virtual column_type get_column_type(bool is_generated) const override;
     virtual void for_each_column(std::function<void(const column_mapper &)> op) const override;
 
+    virtual void from_row(const row &src, int64_t &dest) const override { 
+        direct_mapper::from_row(src, dest);
+    }
+    virtual void to_row(const int64_t &src, row &dest) const override {
+        direct_mapper::to_row(src, dest);
+    }
+
     static void static_forbid_optionals()  {};
 
 private:

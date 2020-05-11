@@ -129,13 +129,13 @@ public:
     void check_metadata(bool for_readonly_access = false) const;
 
     virtual const object_id &query_id() const override      { return _query_id; }
-    virtual const std::string &name() const                 { return _name; }
-    virtual const std::string &basename() const             { return _binomen._local; }
+    virtual const std::string &name() const override        { return _name; }
+    virtual const std::string &basename() const override    { return _binomen._local; }
     virtual const database &get_database() const override   { return _database; }
 
     bool is_open() const                                    { return _is_open; }
     const mapper_factory &get_mapper_factory() const        { return _mapper_factory; }
-    const uint64_t table_id() const                         { return _table_id; }
+    uint64_t table_id() const                               { return _table_id; }
 
     virtual void write_table_reference(sql &) const override;
     virtual column_id_set aliased_columns() const override;
@@ -150,7 +150,8 @@ protected:
         const std::string &name,
         std::unique_ptr<const mapping_customization> mc,
         const Value * // dummy for type inference
-    ) :
+    ) : object_owner { },
+        _query_id(),
         _table_id(_query_id.get()),
         _database(db),
         _name(name),

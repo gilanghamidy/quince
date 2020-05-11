@@ -182,7 +182,7 @@ public:
     const database &get_database() const    { return *_database; }
     const row &get_input() const            { return _input; }
     const std::string &get_text() const     { return _text; }
-    const bool nested_select() const        { return _nested_select; }
+    bool nested_select() const              { return _nested_select; }
 
     bool alias_is_wanted(column_id) const;
     bool alias_is_defined(column_id) const;
