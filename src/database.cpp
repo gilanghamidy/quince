@@ -41,7 +41,7 @@ public:
 
         return session(
             s.release(),
-            [=, this](abstract_session_impl * const released) {
+            [=](abstract_session_impl * const released) {
                 lock_guard<mutex> lock(_mutex);
                 if (era == _era)
                     _reserve.push_front(released);
