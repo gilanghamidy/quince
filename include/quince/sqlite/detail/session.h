@@ -16,7 +16,7 @@
 struct sqlite3;
 
 
-namespace quince_sqlite {
+namespace quince::sqlite {
 
 class database;
 

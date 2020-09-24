@@ -45,6 +45,19 @@ target_include_directories(quince-sqlite
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include"
 )
 
-target_link_libraries(quince-sqlite quince)
+target_link_libraries(quince-sqlite quince sqlite3)
 
 add_subdirectory (binding/sqlite)
+
+add_library(quince-postgresql SHARED ${LIBQUINCE_SOURCES})
+target_include_directories(quince-postgresql
+    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include"
+)
+
+target_include_directories(quince-postgresql
+    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include"
+)
+
+target_link_libraries(quince-postgresql quince)
+
+add_subdirectory (binding/postgresql)

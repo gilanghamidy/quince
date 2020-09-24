@@ -27,7 +27,7 @@ using std::unique_ptr;
 using std::vector;
 
 
-namespace quince_sqlite {
+namespace quince::sqlite {
 
 class session_impl::statement : public abstract_result_stream_impl {
 public:

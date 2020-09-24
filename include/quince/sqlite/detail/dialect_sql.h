@@ -9,7 +9,7 @@
 #include <quince/detail/sql.h>
 
 
-namespace quince_sqlite {
+namespace quince::sqlite {
 
 class database;
 

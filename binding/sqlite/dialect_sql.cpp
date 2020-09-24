@@ -19,7 +19,7 @@ using std::unique_ptr;
 using std::vector;
 
 
-namespace quince_sqlite {
+namespace quince::sqlite {
 
 dialect_sql::dialect_sql(const database &db) :
     sql(db),

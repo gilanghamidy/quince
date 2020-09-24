@@ -14,7 +14,7 @@
 #include <quince/sqlite/detail/session.h>
 
 
-namespace quince_sqlite {
+namespace quince::sqlite {
 
 class table_base;
 class dialect_sql;

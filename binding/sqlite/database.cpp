@@ -35,7 +35,7 @@ using std::vector;
 
 QUINCE_SUPPRESS_MSVC_DOMINANCE_WARNING
 
-namespace quince_sqlite {
+namespace quince::sqlite {
 
 namespace {
     class ptime_mapper : public abstract_mapper<ptime>, public direct_mapper<string>
