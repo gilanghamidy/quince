@@ -58,6 +58,6 @@ target_include_directories(quince-postgresql
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include"
 )
 
-target_link_libraries(quince-postgresql quince)
+target_link_libraries(quince-postgresql quince pq)
 
 add_subdirectory (binding/postgresql)
