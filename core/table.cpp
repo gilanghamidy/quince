@@ -10,7 +10,7 @@
 #include <quince/mappers/detail/persistent_column_mapper.h>
 #include <quince/mappers/serial_mapper.h>
 
-using boost::optional;
+using std::optional;
 using std::set;
 using std::string;
 using std::unique_ptr;
@@ -229,7 +229,7 @@ table_base::readback_id() const {
     if (const serial_mapper * const readback = readback_mapper())
         return readback->id();
     else
-        return boost::none;
+        return std::nullopt;
 }
 
 template<typename Src>

@@ -5,7 +5,7 @@
 
 #include <quince/mappers/tuple_mapper.h>
 
-using boost::optional;
+using std::optional;
 using std::string;
 
 

@@ -130,12 +130,12 @@ public:
         return iterator(_value_mapper, get_database());
     }
 
-    boost::optional<Value>
+    std::optional<Value>
     virtual get() const override {
         if (const std::unique_ptr<row> r = fetch_row(get_database().get_session()))
             return _value_mapper.abstract_mapper<Value>::from_row(*r);
         else
-            return boost::none;
+            return std::nullopt;
     }
 
     query<Value>
@@ -377,8 +377,8 @@ private:
 
     std::shared_ptr<const abstract_mapper<Value>> _mapper;
 
-    // I'd like to replace the std::unique_ptr<Value> with boost::optional<Value>,
-    // but only when boost::optional supports moves.
+    // I'd like to replace the std::unique_ptr<Value> with std::optional<Value>,
+    // but only when std::optional supports moves.
     //
     std::unique_ptr<const Value> _value;
 };

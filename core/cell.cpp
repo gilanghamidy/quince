@@ -16,7 +16,7 @@ cell::cell() {
     clear();
 }
 
-cell::cell(boost::optional<column_type> type, bool is_binary, const void *data, size_t size) :
+cell::cell(std::optional<column_type> type, bool is_binary, const void *data, size_t size) :
     _type(type),
     _is_binary(is_binary)
 {
@@ -25,7 +25,7 @@ cell::cell(boost::optional<column_type> type, bool is_binary, const void *data, 
 }
 
 void cell::clear() {
-    _type = boost::none;
+    _type = std::nullopt;
     _bytes.clear();
     _is_binary = true;
 }

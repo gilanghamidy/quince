@@ -9,7 +9,7 @@
 #include <quince/mappers/serial_mapper.h>
 #include <quince/exprn_mappers/detail/exprn_mapper.h>
 
-using boost::optional;
+using std::optional;
 using std::string;
 using std::unique_ptr;
 
@@ -41,7 +41,7 @@ serial_mapper::to_row(const serial &src, row &dest) const {
     if (src.has_value())
         dest.add(name(), src.value());
     else
-        dest.add(name(), boost::none);
+        dest.add(name(), std::nullopt);
 }
 
 

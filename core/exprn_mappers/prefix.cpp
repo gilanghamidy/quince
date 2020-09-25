@@ -8,7 +8,7 @@
 #include <quince/exprn_mappers/detail/prefix.h>
 #include <quince/query.h>
 
-using boost::optional;
+using std::optional;
 using std::string;
 using std::unique_ptr;
 
@@ -45,7 +45,7 @@ make_prefix_expressionist(
                 return std::make_pair(&_operand, true);
 
             else
-                return boost::none;
+                return std::nullopt;
         }
     };
 

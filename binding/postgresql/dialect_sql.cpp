@@ -15,7 +15,7 @@
 #include <quince/postgresql/detail/dialect_sql.h>
 
 using namespace quince;
-using boost::optional;
+using std::optional;
 using boost::posix_time::ptime;
 using std::string;
 using std::to_string;

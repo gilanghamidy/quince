@@ -48,7 +48,7 @@ protected:
     general_table(
         const database &db,
         const std::string &name,
-        const boost::optional<mapping_customization> &mc = boost::none
+        const std::optional<mapping_customization> &mc = std::nullopt
     ) :
         table_base(db, name, clone_or_null(mc), (Value *)nullptr),
         _value_mapper(dynamic_cast<const value_mapper &>(get_value_mapper_base()))
@@ -59,7 +59,7 @@ protected:
         const database &db,
         const std::string &name,
         PtrToKeyMember ptkm,
-        const boost::optional<mapping_customization> &mc = boost::none
+        const std::optional<mapping_customization> &mc = std::nullopt
     ) :
         general_table<Value>(db, name, mc)
     {
@@ -114,7 +114,7 @@ public:
     table(
         const database &db,
         const std::string &name,
-        const boost::optional<mapping_customization> &mc = boost::none
+        const std::optional<mapping_customization> &mc = std::nullopt
     ) :
         general_table<Value>(db, name, mc)
     {}
@@ -124,14 +124,14 @@ public:
         const database &db,
         const std::string &name,
         PtrToKeyMember ptkm,
-        const boost::optional<mapping_customization > &mc = boost::none
+        const std::optional<mapping_customization > &mc = std::nullopt
     ) :
         general_table<Value>(db, name, ptkm, mc)
     {}
 
     table(
         const database& db,
-        const boost::optional<mapping_customization > &mc = boost::none
+        const std::optional<mapping_customization > &mc = std::nullopt
     ) :
         table(db, std::string { Value::table_name }, Value::primary_key, mc)
     {} // TODO Modify all const string to string_view
@@ -173,7 +173,7 @@ public:
     serial_table(
         const database &db,
         const std::string &name,
-        const boost::optional<mapping_customization> &mc = boost::none
+        const std::optional<mapping_customization> &mc = std::nullopt
     ) :
         general_table<Value>(db, name, mc)
     {}
@@ -183,7 +183,7 @@ public:
         const database &db,
         const std::string &name,
         serial ValueBase::*ptr_to_key_member,
-        const boost::optional<mapping_customization> &mc = boost::none
+        const std::optional<mapping_customization> &mc = std::nullopt
     ) :
         general_table<Value>(db, name, ptr_to_key_member, mc)
     {
@@ -192,7 +192,7 @@ public:
 
     serial_table(
         const database& db,
-        const boost::optional<mapping_customization> &mc = boost::none
+        const std::optional<mapping_customization> &mc = std::nullopt
     ) :
         serial_table(db, std::string { Value::table_name }, Value::primary_key, mc)
     { } // TODO Modify all const string to string_view

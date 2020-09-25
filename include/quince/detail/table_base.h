@@ -179,7 +179,7 @@ private:
     template<typename T>
     std::unique_ptr<abstract_mapper_base>
     make_value_mapper() const {
-        std::unique_ptr<abstract_mapper_base> result = _mapper_factory.create<T>(boost::none);
+        std::unique_ptr<abstract_mapper_base> result = _mapper_factory.create<T>(std::nullopt);
         initialize_mapper(*result);
         result->_table_whose_value_mapper_i_am = this;
         return result;
@@ -216,7 +216,7 @@ private:
     void remove_existing_where(const abstract_predicate &) const;
     bool remove_if_exists_where(const abstract_predicate &) const;
 
-    boost::optional<column_id> readback_id() const;
+    std::optional<column_id> readback_id() const;
 
     template<typename Src> // abstract_mapper_base or row
     std::unique_ptr<sql>

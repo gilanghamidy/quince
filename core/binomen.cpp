@@ -6,7 +6,7 @@
 #include <tuple>
 #include <quince/detail/binomen.h>
 
-using boost::optional;
+using std::optional;
 using std::string;
 
 

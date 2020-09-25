@@ -63,7 +63,7 @@ QUINCE_SPECIFY_COLUMN_TYPE(double,                  column_type::double_precisio
 QUINCE_SPECIFY_COLUMN_TYPE(std::string,             column_type::string)
 QUINCE_SPECIFY_COLUMN_TYPE(quince::timestamp,       column_type::timestamp)
 QUINCE_SPECIFY_COLUMN_TYPE(std::vector<uint8_t>,    column_type::byte_vector)
-QUINCE_SPECIFY_COLUMN_TYPE(boost::none_t,           column_type::none)
+QUINCE_SPECIFY_COLUMN_TYPE(std::nullopt_t,           column_type::none)
 
 
 // get_column_type<T>() looks up the column_type c that was defined somewhere with

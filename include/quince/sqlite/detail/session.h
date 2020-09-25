@@ -25,7 +25,7 @@ public:
     struct spec {
         std::string _filename;
         int _flags;
-        boost::optional<std::string> _vfs_module_name;
+        std::optional<std::string> _vfs_module_name;
     };
 
     explicit session_impl(const database &, const session_impl::spec &);

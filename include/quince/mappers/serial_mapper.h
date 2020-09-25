@@ -31,7 +31,7 @@ class serial_mapper : public abstract_mapper<serial>, public direct_mapper<int64
     // Everything in this class is for quince internal use only.
 
 public:
-    serial_mapper(const boost::optional<std::string> &name, const mapper_factory &);
+    serial_mapper(const std::optional<std::string> &name, const mapper_factory &);
 
     virtual std::unique_ptr<cloneable> clone_impl() const override;
     virtual void from_row(const row &src, serial &dest) const override;

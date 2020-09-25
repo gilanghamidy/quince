@@ -6,7 +6,7 @@
 #include <assert.h>
 #include <quince/mappers/detail/class_mapper_base.h>
 
-using boost::optional;
+using std::optional;
 using std::string;
 using std::unique_ptr;
 using std::vector;

@@ -63,7 +63,7 @@ The following is what it expands into, minus complications 1 and 2, and with:
         // Constructor that is used whenever *this is to be some table's value mapper, or part of some table's
         // value mapper:
         //
-        QUINCE_MAPPER_point(const boost::optional<std::string> &name, const quince::mapper_factory &creator) :
+        QUINCE_MAPPER_point(const std::optional<std::string> &name, const quince::mapper_factory &creator) :
             quince::abstract_mapper_base(name),
             main_base(name),
             x(main_base::add(&point::x, "x", creator)),
@@ -73,8 +73,8 @@ The following is what it expands into, minus complications 1 and 2, and with:
         // Constructor that is used whenever *this is to be a collector class for select() or a function in the join() family:
         //
         QUINCE_MAPPER_point(const x_mapper_type &a_x, const y_mapper_type &a_y) :
-            quince::abstract_mapper_base(boost::none),
-            main_base(boost::none),
+            quince::abstract_mapper_base(std::nullopt),
+            main_base(std::nullopt),
             x(main_base::adopt_member(&point::x, a_x)),
             y(main_base::adopt_member(&point::y, a_y))
         {}
@@ -172,7 +172,7 @@ The following is what it expands into, minus complications 1 and 2, and with:
         typedef CLASS_TYPE value_type; \
         \
         MAPPER_TYPE_NAME( \
-            const boost::optional<std::string> &name, \
+            const std::optional<std::string> &name, \
             const quince::mapper_factory &creator \
         ) : \
             quince::abstract_mapper_base(name), \
@@ -265,8 +265,8 @@ The following is what it expands into, minus complications 1 and 2, and with:
         BOOST_PP_SEQ_FOR_EACH(QUINCE_DECLARE_CTOR_ARGUMENT, CLASS_TYPE, MEMBERS) \
         void * \
     ) : \
-        quince::abstract_mapper_base(boost::none), \
-        main_base(boost::none) \
+        quince::abstract_mapper_base(std::nullopt), \
+        main_base(std::nullopt) \
         BOOST_PP_SEQ_FOR_EACH(QUINCE_ADOPT_MEMBER, CLASS_TYPE, MEMBERS) \
     {}
 

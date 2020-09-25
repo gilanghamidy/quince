@@ -17,7 +17,7 @@
     The purpose of this file is to define the alias template "static_mapper_type".
     All the other definitions you see are helpers for static_mapper_type; they are not used outside.
 
-    static_mapper_type<T> is defined whenever T is a statically mapped type (i.e. a boost::optional,
+    static_mapper_type<T> is defined whenever T is a statically mapped type (i.e. a std::optional,
     std::tuple, or a mapped user-defined class).  Then static_mapper_type<T> is T's concrete mapper type.
 */
 
@@ -36,7 +36,7 @@ struct static_mapper_type_trait {
 };
 
 template<typename T>
-struct static_mapper_type_trait<boost::optional<T>> {
+struct static_mapper_type_trait<std::optional<T>> {
     typedef optional_mapper<T> type;
 };
 

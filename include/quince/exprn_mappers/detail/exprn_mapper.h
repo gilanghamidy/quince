@@ -41,7 +41,7 @@ public:
     virtual void write_expression(sql &) const = 0;
     virtual column_id_set imports() const = 0;
 
-    virtual boost::optional<std::pair<const abstract_mapper_base *, bool>> dissect_as_order_specification() const;
+    virtual std::optional<std::pair<const abstract_mapper_base *, bool>> dissect_as_order_specification() const;
 
 protected:
     std::vector<const abstract_mapper_base *>
@@ -86,22 +86,22 @@ class general_exprn_mapper : public virtual abstract_mapper<Return>, public expr
 {
 public:
     general_exprn_mapper(const Return &value) :
-        abstract_mapper_base(boost::none),
-        abstract_mapper<Return>(boost::none),
+        abstract_mapper_base(std::nullopt),
+        abstract_mapper<Return>(std::nullopt),
         exprn_mapper_base(make_value_expressionist(value)),
         _a_priori_value(value)
     {}
 
     general_exprn_mapper(const abstract_mapper<Return> &delegate) :
-        abstract_mapper_base(boost::none),
-        abstract_mapper<Return>(boost::none),
+        abstract_mapper_base(std::nullopt),
+        abstract_mapper<Return>(std::nullopt),
         exprn_mapper_base(make_delegating_expressionist(delegate)),
         _a_priori_value(delegate.a_priori_value())
     {}
 
     explicit general_exprn_mapper(std::unique_ptr<const abstract_expressionist> &&expressionist) :
-        abstract_mapper_base(boost::none),
-        abstract_mapper<Return>(boost::none),
+        abstract_mapper_base(std::nullopt),
+        abstract_mapper<Return>(std::nullopt),
         exprn_mapper_base(std::move(expressionist))
     {}
 
@@ -114,7 +114,7 @@ public:
         QUINCE_from_cell_via_adl(database, *cell, dest);
     }
 
-    virtual const boost::optional<Return> &
+    virtual const std::optional<Return> &
     a_priori_value() const override {
         return _a_priori_value;
     }
@@ -138,27 +138,27 @@ private:
         return quince::make_unique<value_expressionist<T>>(value);
     }
 
-    boost::optional<Return> _a_priori_value;
+    std::optional<Return> _a_priori_value;
 };
 
 template<typename Return>
 class exprn_mapper : public general_exprn_mapper<Return> {
 public:
     exprn_mapper(const Return &value) :
-        abstract_mapper_base(boost::none),
-        abstract_mapper<Return>(boost::none),
+        abstract_mapper_base(std::nullopt),
+        abstract_mapper<Return>(std::nullopt),
         general_exprn_mapper<Return>(value)
     {}
 
     exprn_mapper(const abstract_mapper<Return> &delegate) :
-        abstract_mapper_base(boost::none),
-        abstract_mapper<Return>(boost::none),
+        abstract_mapper_base(std::nullopt),
+        abstract_mapper<Return>(std::nullopt),
         general_exprn_mapper<Return>(delegate)
     {}
 
     explicit exprn_mapper(std::unique_ptr<const abstract_expressionist> &&expressionist) :
-        abstract_mapper_base(boost::none),
-        abstract_mapper<Return>(boost::none),
+        abstract_mapper_base(std::nullopt),
+        abstract_mapper<Return>(std::nullopt),
         general_exprn_mapper<Return>(std::move(expressionist))
     {}
 
@@ -169,12 +169,12 @@ public:
 };
 
 template<typename Content>
-class exprn_mapper<boost::optional<Content>> :
+class exprn_mapper<std::optional<Content>> :
     public optional_mapper<Content>,
-    public general_exprn_mapper<boost::optional<Content>>
+    public general_exprn_mapper<std::optional<Content>>
 {
 private:
-    typedef boost::optional<Content> return_type;
+    typedef std::optional<Content> return_type;
     typedef optional_mapper<Content> base_optional_mapper;
     typedef general_exprn_mapper<return_type> base_exprn_mapper;
 
@@ -184,31 +184,31 @@ private:
     );
 
 public:
-    exprn_mapper(const boost::optional<std::string> &name, const mapper_factory &creator) :
-        abstract_mapper_base(boost::none),
-        abstract_mapper<return_type>(boost::none),
+    exprn_mapper(const std::optional<std::string> &name, const mapper_factory &creator) :
+        abstract_mapper_base(std::nullopt),
+        abstract_mapper<return_type>(std::nullopt),
         base_optional_mapper(exprn_mapper<Content>(name, creator)),
         base_exprn_mapper(this->make_delegating_expressionist(content_mapper()))
     {}
 
     exprn_mapper(const exposed_mapper_type<Content> &content_mapper) :
-        abstract_mapper_base(boost::none),
-        abstract_mapper<return_type>(boost::none),
+        abstract_mapper_base(std::nullopt),
+        abstract_mapper<return_type>(std::nullopt),
         base_optional_mapper(exprn_mapper<Content>(content_mapper)),
         base_exprn_mapper(this->make_delegating_expressionist(content_mapper()))
     {}
 
     exprn_mapper(std::unique_ptr<const abstract_expressionist> &&expressionist) :
-        abstract_mapper_base(boost::none),
-        abstract_mapper<return_type>(boost::none),
+        abstract_mapper_base(std::nullopt),
+        abstract_mapper<return_type>(std::nullopt),
         base_optional_mapper(exprn_mapper<Content>(std::move(expressionist))),
         base_exprn_mapper(this->make_delegating_expressionist(content_mapper()))
     {}
 
     //template<typename Arg>
     //exprn_mapper(Arg &&arg) :
-    //    abstract_mapper_base(boost::none),
-    //    abstract_mapper<return_type>(boost::none),
+    //    abstract_mapper_base(std::nullopt),
+    //    abstract_mapper<return_type>(std::nullopt),
     //    base_optional_mapper(exprn_mapper<Content>(std::forward<Arg>(arg))),
     //    base_exprn_mapper(make_delegating_expressionist(content_mapper()))
     //{}
@@ -240,7 +240,7 @@ public:
     imports() const override {
         return base_exprn_mapper::imports();
     }
-    virtual const boost::optional<return_type> &
+    virtual const std::optional<return_type> &
     a_priori_value() const override {
         return base_exprn_mapper::a_priori_value();
     }

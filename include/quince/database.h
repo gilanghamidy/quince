@@ -46,14 +46,14 @@ public:
     void discard_connections() const;
 
     virtual std::unique_ptr<sql>            make_sql() const = 0;
-    virtual boost::optional<std::string>    get_default_enclosure() const = 0;
-    virtual void                            make_enclosure_available(const boost::optional<std::string> &enclosure_name) const = 0;
+    virtual std::optional<std::string>    get_default_enclosure() const = 0;
+    virtual void                            make_enclosure_available(const std::optional<std::string> &enclosure_name) const = 0;
     virtual new_session                     make_session() const = 0;
     virtual std::vector<std::string>        retrieve_column_titles(const binomen &table) const = 0;
     virtual serial                          insert_with_readback(std::unique_ptr<sql> insert, const serial_mapper &readback_mapper) const = 0;
     virtual column_type                     retrievable_column_type(column_type declared) const;
     virtual std::string                     column_type_name(quince::column_type) const = 0;
-    virtual boost::optional<size_t>         max_column_name_length() const;
+    virtual std::optional<size_t>         max_column_name_length() const;
 
     virtual bool supports_join(conditional_junction_type) const = 0;
     virtual bool supports_combination(combination_type, bool all) const = 0;

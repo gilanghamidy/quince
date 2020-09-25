@@ -36,7 +36,7 @@ public:
         ! is_polymorphically_mapped<T>::value,
         std::unique_ptr<exposed_mapper_type<T>>
     >::type
-    create(const boost::optional<std::string> &name) const {
+    create(const std::optional<std::string> &name) const {
         return quince::make_unique<static_mapper_type<T>>(name, *this);
     }
 
@@ -45,7 +45,7 @@ public:
         is_polymorphically_mapped<T>::value,
         std::unique_ptr<exposed_mapper_type<T>>
     >::type
-    create(const boost::optional<std::string> &name) const {
+    create(const std::optional<std::string> &name) const {
         for (const mapping_customization *customization: _customization)
             if (std::unique_ptr<abstract_mapper<T>> m = customization->create<T>(name, *this))
                 return m;

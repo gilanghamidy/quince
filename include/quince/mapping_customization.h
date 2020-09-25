@@ -33,7 +33,7 @@ public:
         static_assert(std::is_base_of<abstract_mapper<T>, MapperType>::value, "");
 
         _custom_makers[typeid(T)] =
-            [](const boost::optional<std::string> &name, const mapper_factory &creator) {
+            [](const std::optional<std::string> &name, const mapper_factory &creator) {
                 return quince::make_unique<MapperType>(name, creator);
             };
     }
@@ -53,8 +53,8 @@ private:
 
     template<typename T>
     std::unique_ptr<abstract_mapper<T>>
-    create(const boost::optional<std::string> &name, const mapper_factory &creator) const {
-        if (boost::optional<const maker &> custom = lookup(_custom_makers, typeid(T)))
+    create(const std::optional<std::string> &name, const mapper_factory &creator) const {
+        if (std::optional<std::reference_wrapper<const maker>> custom = lookup(_custom_makers, typeid(T)))
             return downcast_mapper_ptr<T>((*custom)(name, creator));
         else
             return nullptr;
@@ -70,7 +70,7 @@ private:
 
     typedef std::function<
         std::unique_ptr<abstract_mapper_base>(
-            const boost::optional<std::string> &name,
+            const std::optional<std::string> &name,
             const mapper_factory &creator
         )
     > maker;

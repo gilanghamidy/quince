@@ -26,7 +26,7 @@ class cell {
 public:
     cell();
 
-    cell(boost::optional<column_type> type, bool is_binary, const void *data, size_t size);
+    cell(std::optional<column_type> type, bool is_binary, const void *data, size_t size);
 
     template<typename CxxType>
     explicit cell(const CxxType &value) {
@@ -88,7 +88,7 @@ private:
         if (*_type != expected)  throw retrieved_unexpected_type_exception(expected, *_type);
     }
 
-    boost::optional<column_type> _type;
+    std::optional<column_type> _type;
     byte_vector _bytes;
     bool _is_binary;
 

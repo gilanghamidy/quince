@@ -18,7 +18,7 @@
 #include <quince/postgresql/database.h>
 #include <quince/postgresql/detail/dialect_sql.h>
 
-using boost::optional;
+using std::optional;
 using boost::posix_time::ptime;
 using namespace quince;
 using std::dynamic_pointer_cast;
@@ -86,7 +86,7 @@ namespace {
 
     optional<std::string>
     to_optional(const std::string &s) {
-        if (s.empty())  return boost::none;
+        if (s.empty())  return std::nullopt;
         else            return s;
     }
 }
@@ -99,7 +99,7 @@ database::database(
     const std::string &default_schema,
     const std::string &port,
     const optional<isolation_level> level,
-    const boost::optional<mapping_customization> &customization_for_db
+    const std::optional<mapping_customization> &customization_for_db
 ) :
     quince::database(
         clone_or_null(customization_for_db),
@@ -157,7 +157,7 @@ database::make_enclosure_available(const optional<string> &enclosure_name) const
 unique_ptr<session_impl>
 database::make_schemaless_session() const {
     session_impl::spec s = _spec;
-    s._default_schema = boost::none;
+    s._default_schema = std::nullopt;
     return quince::make_unique<session_impl>(*this, s);
 }
 

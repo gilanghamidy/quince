@@ -28,7 +28,7 @@ private:
     typedef typename OldMapper::value_type old_cxx_type;
 
 public:
-    explicit numeric_cast_mapper(const boost::optional<std::string> &name, const mapper_factory &creator) :
+    explicit numeric_cast_mapper(const std::optional<std::string> &name, const mapper_factory &creator) :
         abstract_mapper_base(name),
         abstract_mapper<NewCxxType>(name),
         OldMapper(name, creator)

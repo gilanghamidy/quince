@@ -11,7 +11,7 @@
 #include <quince/exprn_mappers/operators.h>
 #include <quince/query.h>
 
-using boost::optional;
+using std::optional;
 using std::string;
 
 
@@ -32,7 +32,7 @@ namespace {
     template<typename Return, typename Arg>
     exprn_mapper<Return>
     generic_sum(const abstract_mapper<Arg> &arg) {
-        return cast<optional<Return>>(function<any_sum>("sum", arg)).get_value_or(0);
+        return cast<optional<Return>>(function<any_sum>("sum", arg)).value_or(0);
     }
 }
 

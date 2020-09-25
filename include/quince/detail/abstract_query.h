@@ -92,7 +92,7 @@ public:
     virtual query<Value> where(bool b) const                            { return wrapped().where(b); }
     virtual iterator begin() const                                      { return wrapped().begin(); }
     virtual iterator end() const                                        { return wrapped().end(); }
-    virtual boost::optional<Value> get() const                          { return wrapped().get(); }
+    virtual std::optional<Value> get() const                          { return wrapped().get(); }
     virtual query<Value> distinct() const                               { return wrapped().distinct(); }
     virtual query<Value> union_(const query<Value> &rhs) const          { return wrapped().union_(rhs); }
     virtual query<Value> union_all(const query<Value> &rhs) const       { return wrapped().union_all(rhs); }
@@ -203,7 +203,7 @@ public:
             pred,
             conditional_junction_type::inner,
             (Value *) nullptr,
-            (boost::optional<V> *) nullptr
+            (std::optional<V> *) nullptr
         );
     }
 
@@ -220,7 +220,7 @@ public:
             that,
             pred,
             implementation_type,
-            (boost::optional<Value> *) nullptr,
+            (std::optional<Value> *) nullptr,
             (V *) nullptr,
             implementation_type == conditional_junction_type::left
         );
@@ -235,8 +235,8 @@ public:
                 that,
                 pred,
                 conditional_junction_type::full,
-                (boost::optional<Value> *) nullptr,
-                (boost::optional<V> *) nullptr
+                (std::optional<Value> *) nullptr,
+                (std::optional<V> *) nullptr
             );
         else
             throw unsupported_exception();
@@ -255,27 +255,27 @@ public:
     }
 
     template<typename V>
-    conditional_junction<std::tuple<Value, boost::optional<V>>>
+    conditional_junction<std::tuple<Value, std::optional<V>>>
     left_join(const abstract_query<V> &that, const abstract_predicate &pred) const {
-        return left_join<std::tuple<Value, boost::optional<V>>>(that, pred);
+        return left_join<std::tuple<Value, std::optional<V>>>(that, pred);
     }
 
     template<typename V> 
-    conditional_junction<std::tuple<boost::optional<Value>, V>>
+    conditional_junction<std::tuple<std::optional<Value>, V>>
     right_join(const abstract_query<V> &that, const abstract_predicate &pred) const {
-        return right_join<std::tuple<boost::optional<Value>, V>>(that, pred);
+        return right_join<std::tuple<std::optional<Value>, V>>(that, pred);
     }
 
     template<typename V>
-    conditional_junction<std::tuple<boost::optional<Value>, boost::optional<V>>>
+    conditional_junction<std::tuple<std::optional<Value>, std::optional<V>>>
     full_join(const abstract_query<V> &that, const abstract_predicate &pred) const {
-        return full_join<std::tuple<boost::optional<Value>, boost::optional<V>>>(that, pred);
+        return full_join<std::tuple<std::optional<Value>, std::optional<V>>>(that, pred);
     }
 
     template<typename T>
     T
     evaluate(const exprn_mapper<T> &exprn) const {
-        const boost::optional<T> result = select(exprn).get();
+        const std::optional<T> result = select(exprn).get();
         if (! result)  throw no_row_exception();
         return * result;
     }

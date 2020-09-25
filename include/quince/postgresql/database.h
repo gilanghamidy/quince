@@ -28,8 +28,8 @@ public:
         const std::string &db_name = "",
         const std::string &default_schema = "",
         const std::string &port = "",
-        const boost::optional<isolation_level> = boost::none,
-        const boost::optional<quince::mapping_customization> &customization_for_db = boost::none
+        const std::optional<isolation_level> = std::nullopt,
+        const std::optional<quince::mapping_customization> &customization_for_db = std::nullopt
     );
 
     virtual ~database();
@@ -38,14 +38,14 @@ public:
     // --- Everything from here to end of class is for quince internal use only. ---
 
     virtual std::unique_ptr<quince::sql>    make_sql() const override;
-    virtual boost::optional<std::string>    get_default_enclosure() const override;
-    void                                    make_enclosure_available(const boost::optional<std::string> &enclosure_name) const override;
+    virtual std::optional<std::string>    get_default_enclosure() const override;
+    void                                    make_enclosure_available(const std::optional<std::string> &enclosure_name) const override;
     virtual quince::new_session             make_session() const override;
     virtual std::vector<std::string>        retrieve_column_titles(const quince::binomen &table) const override;
     virtual quince::column_type             retrievable_column_type(quince::column_type declared) const override;
     virtual quince::serial                  insert_with_readback(std::unique_ptr<quince::sql> insert, const quince::serial_mapper &readback_mapper) const override;
     virtual std::string                     column_type_name(quince::column_type) const override;
-    virtual boost::optional<size_t>         max_column_name_length() const override;
+    virtual std::optional<size_t>         max_column_name_length() const override;
 
     virtual bool supports_join(quince::conditional_junction_type) const override        { return true; }
     virtual bool supports_combination(quince::combination_type, bool) const override    { return true; }
@@ -56,7 +56,7 @@ public:
     std::unique_ptr<dialect_sql> make_dialect_sql() const;
 
     void create_schema(const std::string &schema_name) const;
-    bool create_schema_if_not_exists(const boost::optional<std::string> &schema_name) const;
+    bool create_schema_if_not_exists(const std::optional<std::string> &schema_name) const;
 
 private:
     std::unique_ptr<session_impl> make_schemaless_session() const;

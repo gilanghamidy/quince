@@ -33,7 +33,7 @@ class abstract_mapper_base :
     // Everything in this class is for quince internal use only.
 
 public:
-    abstract_mapper_base(const boost::optional<std::string> &name);
+    abstract_mapper_base(const std::optional<std::string> &name);
     virtual ~abstract_mapper_base()  {};
 
     bool has_name() const;
@@ -93,7 +93,7 @@ private:
     //
     virtual void build_match_tester(const query_base &q, predicate &result) const = 0;
 
-    boost::optional<std::string> _name;
+    std::optional<std::string> _name;
     const table_base *_table_whose_value_mapper_i_am;
     mutable bool _can_be_all_null;
 };

@@ -5,7 +5,7 @@
 
 #include <quince/mappers/detail/column_mapper.h>
 
-using boost::optional;
+using std::optional;
 using std::string;
 
 

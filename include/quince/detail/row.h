@@ -86,7 +86,7 @@ public:
 
     std::vector<cell> values() const;
 
-    boost::optional<row> pick(const std::vector<std::string> &names) const;
+    std::optional<row> pick(const std::vector<std::string> &names) const;
 
     const cell &only_cell() const;
     const cell *find_cell(const std::string &name) const;

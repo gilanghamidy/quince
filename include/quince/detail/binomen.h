@@ -23,19 +23,19 @@ struct binomen {
     // _enclosure is the name of a dbns structure in which tables belong.
     //  E.g. it's a schema name in postgresql, and a database name in sqlite.
     //
-    boost::optional<std::string> _enclosure;
+    std::optional<std::string> _enclosure;
 
     // Currently _local is always a table name, but in future it might be use
     // as the name of an index or anything else that is local to an enclosure.
     //
     std::string _local;
 
-    static binomen split(const std::string &full, const boost::optional<std::string> &default_enclosure = boost::none);
+    static binomen split(const std::string &full, const std::optional<std::string> &default_enclosure = std::nullopt);
 
 private:
     // Private so you can't accidentally call it when you mean to call split().
     //
-    binomen(const boost::optional<std::string> &enclosure, const std::string &local);
+    binomen(const std::optional<std::string> &enclosure, const std::string &local);
 };
 
 }

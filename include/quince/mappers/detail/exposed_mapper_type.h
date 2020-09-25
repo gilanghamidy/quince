@@ -27,7 +27,7 @@
         std::string, vector<uint8_t>, or an artefact of QUINCE_DEFINE_SERVER_ONLY_TYPE)
         then exposed_mapper_type<T> is an alias of abstract_mapper<T>.
     
-    2.  It T is a statically mapped type (i.e. a boost::optional, std::tuple, or
+    2.  It T is a statically mapped type (i.e. a std::optional, std::tuple, or
         a mapped user-defined class), then exposed_mapper_type<T> is an alias of
         static_mapper_type<T>.
 */

@@ -30,8 +30,8 @@ public:
         bool may_write = true,
         bool mutex = true,
         bool share_cache = true,
-        boost::optional<std::string> vfs_module_name = boost::none,
-        const boost::optional<quince::mapping_customization> &customization_for_db = boost::none,
+        std::optional<std::string> vfs_module_name = std::nullopt,
+        const std::optional<quince::mapping_customization> &customization_for_db = std::nullopt,
         const filename_map &attachable_database_filenames = filename_map()
     );
 
@@ -41,8 +41,8 @@ public:
     // --- Everything from here to end of class is for quince internal use only. ---
 
     virtual std::unique_ptr<quince::sql>    make_sql() const override;
-    virtual boost::optional<std::string>    get_default_enclosure() const override;
-    void                                    make_enclosure_available(const boost::optional<std::string> &enclosure_name) const override;
+    virtual std::optional<std::string>    get_default_enclosure() const override;
+    void                                    make_enclosure_available(const std::optional<std::string> &enclosure_name) const override;
     virtual quince::new_session             make_session() const override;
     virtual std::vector<std::string>        retrieve_column_titles(const quince::binomen &table) const override;
     virtual quince::serial                  insert_with_readback(std::unique_ptr<quince::sql> insert, const quince::serial_mapper &unused) const override;

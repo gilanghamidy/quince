@@ -35,7 +35,7 @@ class direct_mapper : public abstract_mapper<CxxType>, public persistent_column_
 public:
     using abstract_mapper_base::name;
 
-    explicit direct_mapper(const boost::optional<std::string> &name, const mapper_factory &) :
+    explicit direct_mapper(const std::optional<std::string> &name, const mapper_factory &) :
         abstract_mapper_base(name),
         abstract_mapper<CxxType>(name),
         persistent_column_mapper(name)

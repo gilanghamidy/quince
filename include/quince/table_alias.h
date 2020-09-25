@@ -55,7 +55,7 @@ private:
     template<typename T>
     std::unique_ptr<abstract_mapper_base>
     make_value_mapper() const {
-        std::unique_ptr<abstract_mapper_base> result = _table.get_mapper_factory().create<T>(boost::none);
+        std::unique_ptr<abstract_mapper_base> result = _table.get_mapper_factory().create<T>(std::nullopt);
         initialize_mapper(*result);
         return result;
     }

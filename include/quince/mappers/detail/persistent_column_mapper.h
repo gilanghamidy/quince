@@ -27,7 +27,7 @@ class persistent_column_mapper : public column_mapper {
     // Everything in this class is for quince internal use only.
 
 public:
-    explicit persistent_column_mapper(const boost::optional<std::string> &name);
+    explicit persistent_column_mapper(const std::optional<std::string> &name);
 
     virtual column_id_set imports() const override;
 

@@ -29,10 +29,10 @@ public:
         std::string _host;
         std::string _user;
         std::string _password;
-        boost::optional<std::string> _db_name;
-        boost::optional<std::string> _default_schema;
-        boost::optional<std::string> _port;
-        boost::optional<isolation_level> _isolation;
+        std::optional<std::string> _db_name;
+        std::optional<std::string> _default_schema;
+        std::optional<std::string> _port;
+        std::optional<isolation_level> _isolation;
 
         std::string connection_string() const;
     };

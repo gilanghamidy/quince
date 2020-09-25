@@ -101,7 +101,7 @@ protected:
     static const optional_mapper<T>
     from_non_optional(
         const exposed_mapper_type<T> &m,
-        boost::optional<T> *    // dummy to indicate destination type
+        std::optional<T> *    // dummy to indicate destination type
     ) {
         if (m.can_be_all_null())  throw ambiguous_nulls_exception();
         return optional_mapper<T>(m);

@@ -18,7 +18,7 @@
 #include <quince/sqlite/detail/dialect_sql.h>
 #include <quince/sqlite/detail/session.h>
 
-using boost::optional;
+using std::optional;
 using namespace quince;
 using std::dynamic_pointer_cast;
 using std::shared_ptr;
@@ -95,7 +95,7 @@ private:
             case SQLITE_FLOAT:      return cell(sqlite3_column_double(_stmt, index));
             case SQLITE_TEXT:       return cell(column_to_string(index));
             case SQLITE_BLOB:       return cell(column_to_byte_vector(index));
-            case SQLITE_NULL:       return cell(boost::none);
+            case SQLITE_NULL:       return cell(std::nullopt);
             default:                throw retrieved_unrecognized_type_exception(type);
         }
     }

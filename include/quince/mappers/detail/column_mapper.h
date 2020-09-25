@@ -20,7 +20,7 @@ class column_mapper : public virtual abstract_mapper_base {
     // Everything in this class is for quince internal use only.
 
 public:
-    column_mapper(const boost::optional<std::string> &name);
+    column_mapper(const std::optional<std::string> &name);
     virtual ~column_mapper()  {}
 
     virtual column_type get_column_type(bool is_generated) const = 0;

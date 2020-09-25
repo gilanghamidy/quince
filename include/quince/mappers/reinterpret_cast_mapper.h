@@ -24,7 +24,7 @@ class reinterpret_cast_mapper : public abstract_mapper<NewCxxType>, public OldMa
 public:
     typedef typename OldMapper::value_type old_cxx_type;
 
-    explicit reinterpret_cast_mapper(const boost::optional<std::string> &name, const mapper_factory &creator) :
+    explicit reinterpret_cast_mapper(const std::optional<std::string> &name, const mapper_factory &creator) :
         abstract_mapper_base(name),
         abstract_mapper<NewCxxType>(name),
         OldMapper(name, creator)

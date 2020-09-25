@@ -8,7 +8,7 @@
 #include <quince/detail/row.h>
 #include <quince/detail/util.h>
 
-using boost::optional;
+using std::optional;
 using std::string;
 using std::vector;
 
@@ -37,7 +37,7 @@ row::only_cell() const {
 
 const cell *
 row::find_cell(const string &name) const {
-    if (optional<const uint32_t &> index = lookup(_map, name))
+    if (optional<const uint32_t> index = lookup(_map, name))
         return &_cells[*index];
     else
         return nullptr;
@@ -45,7 +45,7 @@ row::find_cell(const string &name) const {
 
 void
 row::delete_if_exists(const string &name) {
-    if (optional<const uint32_t &> index = lookup(_map, name))
+    if (optional<const uint32_t> index = lookup(_map, name))
         _cells[*index].clear();
 }
 
@@ -91,9 +91,13 @@ row::pick(const vector<string> &names) const {
             got_values = true;
         }
         else
-            r.add(boost::none);
+            r.add(std::nullopt);
     }
-    return boost::make_optional(got_values, r);
+    if(got_values) {
+        return std::make_optional(r);
+    } else {
+        return std::nullopt;
+    }
 }
 
 uint64_t

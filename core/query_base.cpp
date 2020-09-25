@@ -18,7 +18,7 @@
 #include <quince/transaction.h>
 
 using boost::format;
-using boost::optional;
+using std::optional;
 using std::string;
 using std::shared_ptr;
 using std::unique_ptr;

@@ -9,7 +9,7 @@
 #include <quince/exceptions.h>
 #include <quince/mappers/detail/persistent_column_mapper.h>
 
-using boost::optional;
+using std::optional;
 using std::string;
 
 

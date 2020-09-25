@@ -24,12 +24,12 @@
 
 namespace quince {
 
-// optional_mapper<Content> is the mapper class for boost::optional<Content>
+// optional_mapper<Content> is the mapper class for std::optional<Content>
 //
 template<typename Content>
-class optional_mapper : public virtual abstract_mapper<boost::optional<Content>> {
+class optional_mapper : public virtual abstract_mapper<std::optional<Content>> {
 public:
-    typedef boost::optional<Content> value_type;
+    typedef std::optional<Content> value_type;
 
     // These public functions are described at http://quince-lib.com/mapped_data_types/boost_optional.html
 
@@ -44,7 +44,7 @@ public:
     }
 
     exprn_mapper<Content>
-    get_value_or(const exprn_mapper<Content> &fallback) const {
+    value_or(const exprn_mapper<Content> &fallback) const {
         if (is_optimized() && _content.size() == 1)
             return coalesce(_content, fallback);
         else
@@ -55,8 +55,8 @@ public:
     }
 
     exprn_mapper<Content>
-    get_value_or(const Content &fallback) const {
-        return get_value_or(exprn_mapper<Content>(fallback));
+    value_or(const Content &fallback) const {
+        return value_or(exprn_mapper<Content>(fallback));
     }
 
     predicate
@@ -73,13 +73,13 @@ public:
     // Constructor that is used whenever *this is to be some table's value mapper, or part of some table's
     // value mapper:
     //
-    optional_mapper(const boost::optional<std::string> &name, const mapper_factory &creator) :
-        abstract_mapper_base(boost::none),
+    optional_mapper(const std::optional<std::string> &name, const mapper_factory &creator) :
+        abstract_mapper_base(std::nullopt),
         abstract_mapper<value_type>(name),
         _content(this->own(creator.create<Content>(name))),
         _flag(
             _content.can_be_all_null()
-                ? &this->own(creator.create<bool>(name.get_value_or("") + ".$opt"))
+                ? &this->own(creator.create<bool>(name.value_or("") + ".$opt"))
                 : nullptr
         )
     {
@@ -89,8 +89,8 @@ public:
     // Constructor that is used whenever *this is to be a collector class for select() or a function in the join() family:
     //
     explicit optional_mapper(const exposed_mapper_type<Content> &content_mapper) :
-        abstract_mapper_base(boost::none),
-        abstract_mapper<value_type>(boost::none),
+        abstract_mapper_base(std::nullopt),
+        abstract_mapper<value_type>(std::nullopt),
         _content(this->own(clone(content_mapper))),
         _flag(nullptr)
     {
@@ -126,7 +126,7 @@ public:
         if (got_value)
             dest = _content.abstract_mapper<Content>::from_row(src);
         else
-            dest = boost::none;
+            dest = std::nullopt;
     }
 
     virtual void
@@ -140,7 +140,7 @@ public:
             _content.to_row(*src, dest);
         else
             _content.for_each_persistent_column([&](const persistent_column_mapper &p) {
-                dest.add(p.name(), cell(boost::none));
+                dest.add(p.name(), cell(std::nullopt));
             });
     }
 

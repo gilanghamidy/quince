@@ -30,7 +30,7 @@ public:
     typedef CxxType value_type;
     CxxType value_declval() const;  // never defined, never called, only mentioned in declspec(...) contexts.
 
-    abstract_mapper(const boost::optional<std::string> &name) :
+    abstract_mapper(const std::optional<std::string> &name) :
         abstract_mapper_base(name)
     {}
 
@@ -47,11 +47,11 @@ public:
     }
 
     // If the result of evaluating this mapper is known without consulting the DBMS,
-    // the a_priori_value() returns that known value; otherwise it returns boost::none.
+    // the a_priori_value() returns that known value; otherwise it returns std::nullopt.
     // E.g.:
     //          *exprn_mapper<int32_t>(6).a_priori_value() == 6
     //
-    virtual const boost::optional<CxxType> &
+    virtual const std::optional<CxxType> &
     a_priori_value() const {
         return none;
     }
@@ -62,10 +62,10 @@ protected:
     virtual void build_match_tester(const query_base &q, predicate &result) const override;
 
 private:
-    static const boost::optional<CxxType> none;
+    static const std::optional<CxxType> none;
 };
 
-template<typename CxxType> const boost::optional<CxxType> abstract_mapper<CxxType>::none = boost::none;
+template<typename CxxType> const std::optional<CxxType> abstract_mapper<CxxType>::none = std::nullopt;
 
 
 typedef abstract_mapper<bool> abstract_predicate;
@@ -73,12 +73,12 @@ typedef abstract_mapper<bool> abstract_predicate;
 
 inline bool
 a_priori_true(const abstract_predicate &pred) {
-    return pred.a_priori_value().get_value_or(false);
+    return pred.a_priori_value().value_or(false);
 }
 
 inline bool
 a_priori_false(const abstract_predicate &pred) {
-    const bool could_be_true = pred.a_priori_value().get_value_or(true);
+    const bool could_be_true = pred.a_priori_value().value_or(true);
     return ! could_be_true;
 }
 

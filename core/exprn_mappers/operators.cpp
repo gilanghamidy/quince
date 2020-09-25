@@ -8,7 +8,7 @@
 #include <quince/exprn_mappers/operators.h>
 #include <quince/query.h>
 
-using boost::optional;
+using std::optional;
 
 
 namespace quince {

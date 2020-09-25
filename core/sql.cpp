@@ -20,7 +20,7 @@
 #include <quince/table.h>
 
 using boost::format;
-using boost::optional;
+using std::optional;
 using std::pair;
 using std::string;
 using std::to_string;
@@ -35,7 +35,7 @@ sql::sql(const database &db) :
     _input(&db),
     _wanted_aliases(universalizable_column_id_set::universal()),
     _nested_select(false),
-    _implicit_table(boost::none),
+    _implicit_table(std::nullopt),
     _next_subquery_alias(0)
 {}
 
@@ -237,9 +237,9 @@ sql::write_cast(const column_mapper &arg, const column_type cast_type) {
 
 void
 sql::write_case(
-    optional<const column_mapper &> switch_,
+    optional<std::reference_wrapper<const column_mapper>> switch_,
     const vector<pair<const column_mapper *, const column_mapper *>> &clauses,
-    optional<const column_mapper &> default_
+    optional<std::reference_wrapper<const column_mapper>> default_
 )
 {
     write("CASE ");
@@ -721,7 +721,7 @@ sql::expression_restriction_scope::expression_restriction_scope(sql &cmd, const 
 }
 
 sql::expression_restriction_scope::~expression_restriction_scope() {
-    _command._implicit_table = boost::none;
+    _command._implicit_table = std::nullopt;
 }
 
 

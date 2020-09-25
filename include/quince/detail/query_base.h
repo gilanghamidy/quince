@@ -177,7 +177,7 @@ protected:
     void add_real_combine(combination_type, bool all, const query_base &rhs);
     void set_value_mapper_is_inherited(bool);
 
-    const boost::optional<std::vector<const abstract_mapper_base *>> &distinct_list() const;
+    const std::optional<std::vector<const abstract_mapper_base *>> &distinct_list() const;
 
     void add_orders(std::vector<std::unique_ptr<const abstract_mapper_base>> &&orders_hi_to_lo);
     void clear_orders();
@@ -229,10 +229,10 @@ private:
     const database &_database;
     bool _value_mapper_is_inherited;
     predicate _predicate;
-    boost::optional<std::vector<const abstract_mapper_base *>> _distinct_list;
+    std::optional<std::vector<const abstract_mapper_base *>> _distinct_list;
     std::vector<const abstract_mapper_base *> _group_by;
     std::vector<const abstract_mapper_base *> _orders_lo_to_hi;
-    boost::optional<uint32_t> _limit;
+    std::optional<uint32_t> _limit;
     uint32_t _offset;
     uint32_t _fetch_size;
     std::vector<const combination *> _combinations;

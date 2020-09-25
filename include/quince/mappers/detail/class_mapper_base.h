@@ -31,7 +31,7 @@ class class_mapper_base : public virtual abstract_mapper_base {
     // Everything in this class is for quince internal use only.
 
 public:
-    explicit class_mapper_base(const boost::optional<std::string> &name);
+    explicit class_mapper_base(const std::optional<std::string> &name);
 
     virtual ~class_mapper_base()  {}
 
@@ -112,7 +112,7 @@ public:
     }
 
 protected:
-    typed_class_mapper_base(const boost::optional<std::string> &name) :
+    typed_class_mapper_base(const std::optional<std::string> &name) :
         abstract_mapper_base(name),
         abstract_mapper<CxxClassType>(name),
         class_mapper_base(name)

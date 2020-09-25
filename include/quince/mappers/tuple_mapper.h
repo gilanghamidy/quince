@@ -26,7 +26,7 @@ class tuple_mapper_base : public virtual abstract_mapper_base {
     // Everything in this class is for quince internal use only.
 
 protected:
-    explicit tuple_mapper_base(const boost::optional<std::string> &name);
+    explicit tuple_mapper_base(const std::optional<std::string> &name);
 
     virtual ~tuple_mapper_base()  {}
 
@@ -76,7 +76,7 @@ public:
     // Constructor that is used whenever *this is to be some table's value mapper, or part of some table's
     // value mapper:
     //
-    tuple_mapper(const boost::optional<std::string> &name, const mapper_factory &creator) :
+    tuple_mapper(const std::optional<std::string> &name, const mapper_factory &creator) :
         abstract_mapper_base(name),
         abstract_mapper<value_type>(name),
         tuple_mapper_base(name),
@@ -100,9 +100,9 @@ public:
     // Constructor that is used whenever *this is to be a collector class for select() or a function in the join() family:
     //
     explicit tuple_mapper(const exposed_mapper_type<Es> &... member_mappers) :
-        abstract_mapper_base(boost::none),
-        abstract_mapper<value_type>(boost::none),
-        tuple_mapper_base(boost::none),
+        abstract_mapper_base(std::nullopt),
+        abstract_mapper<value_type>(std::nullopt),
+        tuple_mapper_base(std::nullopt),
         _member_mappers(&adopt(member_mappers)...)
     {}
 

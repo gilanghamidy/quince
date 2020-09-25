@@ -85,9 +85,9 @@ public:
     virtual void write_infix_exprn(const column_mapper &lhs, const std::string &op, const column_mapper &rhs);
     virtual void write_cast(const column_mapper &arg, const column_type cast_type);
     virtual void write_case(
-        boost::optional<const column_mapper &> switch_,
+        std::optional<std::reference_wrapper<const column_mapper>> switch_,
         const std::vector<std::pair<const column_mapper *, const column_mapper *>> &clauses,
-        boost::optional<const column_mapper &> default_
+        std::optional<std::reference_wrapper<const column_mapper>> default_
     );
     virtual void write_scalar_subquery(const query_base &);
     virtual void write_subquery_exists(const query_base &);
@@ -111,7 +111,7 @@ public:
     virtual void write_select_list(const abstract_column_sequence &);
     virtual void write_group_by(const std::vector<const abstract_mapper_base *> &);
     virtual void write_ordered_by(const std::vector<const abstract_mapper_base *> &);
-    virtual void write_values(const abstract_mapper_base &, const row &, boost::optional<column_id> excluded);
+    virtual void write_values(const abstract_mapper_base &, const row &, std::optional<column_id> excluded);
     virtual void write_cross_join(const std::vector<const abstract_query_base *> &joinees);   
     virtual void write_qualified_join(const abstract_query_base &lhs, const abstract_query_base &rhs, conditional_junction_type);
     virtual void write_combination(combination_type type, bool all, const query_base &rhs);
@@ -130,7 +130,7 @@ public:
         const binomen &table,
         const abstract_mapper_base &value_mapper,
         const abstract_mapper_base &key_mapper,
-        boost::optional<column_id> generated_key,
+        std::optional<column_id> generated_key,
         const std::vector<foreign_spec> &
     );
 
@@ -148,31 +148,31 @@ public:
     virtual void write_insert(
         const binomen &table,
         const abstract_mapper_base &,
-        boost::optional<column_id> excluded
+        std::optional<column_id> excluded
     );
 
     virtual void write_update(
         const binomen &table,
         const abstract_mapper_base &dest,
         const abstract_mapper_base &src,
-        boost::optional<column_id> excluded
+        std::optional<column_id> excluded
     );
 
     virtual void write_update(
         const binomen &table,
         const abstract_mapper_base &dest,
         const row &src,
-        boost::optional<column_id> excluded
+        std::optional<column_id> excluded
     );
 
     virtual void write_delete_from(const binomen &table);
     virtual void write_set_search_path(const std::string &schema_name);
 
     virtual void write_rename_table(const binomen &old, const std::string &new_local);
-    virtual void write_add_columns(const binomen &table, const abstract_mapper_base &, boost::optional<column_id> generated_key);
+    virtual void write_add_columns(const binomen &table, const abstract_mapper_base &, std::optional<column_id> generated_key);
     virtual void write_drop_columns(const binomen &table, const abstract_mapper_base &);
     virtual void write_rename_column(const binomen &table, const std::string &before, const std::string &after);
-    virtual void write_set_columns_types(const binomen &table, const abstract_mapper_base &, boost::optional<column_id> generated_key);
+    virtual void write_set_columns_types(const binomen &table, const abstract_mapper_base &, std::optional<column_id> generated_key);
 
     virtual void write_drop_table(const binomen &);
     virtual void write_drop_table_if_exists(const binomen &);
@@ -293,11 +293,11 @@ protected:
 
     virtual void write_parenthesized_persistent_column_list(
         const abstract_mapper_base &,
-        boost::optional<column_id> excluded = boost::none
+        std::optional<column_id> excluded = std::nullopt
     );
 
-    virtual void write_title(const persistent_column_mapper &, boost::optional<column_id> generated_key);
-    virtual void write_titles(const abstract_mapper_base &, boost::optional<column_id> generated_key);
+    virtual void write_title(const persistent_column_mapper &, std::optional<column_id> generated_key);
+    virtual void write_titles(const abstract_mapper_base &, std::optional<column_id> generated_key);
 
     virtual void write_simple_comparison(const std::string &op, thunk lhs, thunk rhs);
 
@@ -339,7 +339,7 @@ private:
     universalizable_column_id_set _wanted_aliases;
     column_id_set _aliased_columns;
     bool _nested_select;
-    boost::optional<std::string> _implicit_table;
+    std::optional<std::string> _implicit_table;
     uint32_t _next_subquery_alias;
 };
 

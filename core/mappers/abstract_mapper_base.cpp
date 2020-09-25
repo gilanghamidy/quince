@@ -12,7 +12,7 @@ using std::string;
 
 namespace quince {
 
-abstract_mapper_base::abstract_mapper_base(const boost::optional<std::string> &name) :
+abstract_mapper_base::abstract_mapper_base(const std::optional<std::string> &name) :
     _name(name),
     _can_be_all_null(false)
 {

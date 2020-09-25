@@ -13,6 +13,7 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
+#include <functional>
 #include <boost/implicit_cast.hpp>
 #include <boost/optional.hpp>
 
@@ -132,10 +133,10 @@ is_subset(const std::set<T> &sub, const std::set<T> &super) {
 }
 
 template<typename Map>
-boost::optional<const typename Map::mapped_type &>
+std::optional<std::reference_wrapper<const typename Map::mapped_type>>
 lookup(const Map &map, const typename Map::key_type &key) {
     const auto iter = map.find(key);
-    if (iter == map.end())  return boost::none;
+    if (iter == map.end())  return std::nullopt;
     else                    return iter->second;
 }
 
@@ -186,7 +187,7 @@ public:
 
     static universalizable_set<T>
     universal() {
-        return universalizable_set<T>(boost::none);
+        return universalizable_set<T>(std::nullopt);
     }
 
     bool
@@ -216,11 +217,11 @@ public:
     }
 
 private:
-    universalizable_set(boost::none_t) : _set(boost::none)  {}
+    universalizable_set(std::nullopt_t) : _set(std::nullopt)  {}
 
-    // We use _set == boost::none to represent the universal set.
+    // We use _set == std::nullopt to represent the universal set.
     //
-    boost::optional<std::set<T>> _set;
+    std::optional<std::set<T>> _set;
 };
 
 template<typename>
@@ -228,7 +229,7 @@ struct is_optional : public std::false_type
 {};
 
 template<typename T>
-struct is_optional<boost::optional<T>> : public std::true_type
+struct is_optional<std::optional<T>> : public std::true_type
 {};
 
 

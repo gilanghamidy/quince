@@ -21,7 +21,7 @@
 #include <quince/sqlite/detail/dialect_sql.h>
 
 using namespace quince;
-using boost::optional;
+using std::optional;
 using boost::posix_time::ptime;
 using boost::filesystem::path;
 using std::dynamic_pointer_cast;
@@ -105,7 +105,7 @@ database::database(
     bool mutex,
     bool share_cache,
     optional<string> vfs_module_name,
-    const boost::optional<mapping_customization> &customization_for_db,
+    const std::optional<mapping_customization> &customization_for_db,
     const filename_map &attachable_database_filenames
 ) :
     quince::database(
@@ -134,14 +134,14 @@ database::make_sql() const {
 
 optional<string>
 database::get_default_enclosure() const {
-    return boost::none;
+    return std::nullopt;
 }
 
 void
 database::make_enclosure_available(const optional<string> &enclosure_name) const {
     if (enclosure_name) {
         path absolute;
-        if (const optional<const path &> found = lookup(_attachable_database_absolute_filenames, *enclosure_name))
+        if (const optional<const path> found = lookup(_attachable_database_absolute_filenames, *enclosure_name))
             absolute = std::move(*found);
         else
             absolute = boost::filesystem::absolute(path(*enclosure_name));

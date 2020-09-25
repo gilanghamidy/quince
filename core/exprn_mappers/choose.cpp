@@ -7,7 +7,7 @@
 #include <quince/exprn_mappers/choose.h>
 #include <quince/query.h>
 
-using boost::optional;
+using std::optional;
 using std::unique_ptr;
 using std::vector;
 
@@ -23,9 +23,9 @@ make_case_expressionist(
     struct expressionist : public abstract_expressionist {
         typedef std::pair<const abstract_mapper_base *, const abstract_mapper_base *> clause;
 
-        optional<const abstract_mapper_base &> _switch;
+        std::optional<std::reference_wrapper<const abstract_mapper_base>> _switch;
         vector<clause> _clauses;
-        optional<const abstract_mapper_base &> _default;
+        std::optional<std::reference_wrapper<const abstract_mapper_base>> _default;
 
         explicit expressionist(
             unique_ptr<const abstract_mapper_base> &switch_,
@@ -58,13 +58,13 @@ make_case_expressionist(
         imports() const override {
             column_id_set result;
             if (_switch)
-                add_to_set(result, _switch->imports());
+                add_to_set(result, _switch->get().imports());
             for (const auto &c: _clauses) {
                 add_to_set(result, c.first->imports());
                 add_to_set(result, c.second->imports());
             }
             if (_default)
-                add_to_set(result, _default->imports());
+                add_to_set(result, _default->get().imports());
             return result;
         }
 
@@ -74,10 +74,10 @@ make_case_expressionist(
             return { &c.first->only_column(), &c.second->only_column() };
         }
 
-        static optional<const column_mapper &>
-        optional_only_column(optional<const abstract_mapper_base &> m) {
-            if (m)  return m->only_column();
-            else    return boost::none;
+        static optional<std::reference_wrapper<const column_mapper>>
+        optional_only_column(optional<std::reference_wrapper<const abstract_mapper_base>> m) {
+            if (m)  return m->get().only_column();
+            else    return std::nullopt;
         }
     };
 

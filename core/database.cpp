@@ -9,7 +9,7 @@
 #include <quince/detail/session.h>
 #include <quince/detail/util.h>
 
-using boost::optional;
+using std::optional;
 using std::lock_guard;
 using std::mutex;
 using std::string;
@@ -108,7 +108,7 @@ database::retrievable_column_type(column_type declared) const {
 
 optional<size_t>
 database::max_column_name_length() const {
-    return boost::none;
+    return std::nullopt;
 }
 
 }

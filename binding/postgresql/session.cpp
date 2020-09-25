@@ -21,7 +21,7 @@
 #include <quince/postgresql/detail/session.h>
 
 using boost::format;
-using boost::optional;
+using std::optional;
 using namespace quince;
 using std::dynamic_pointer_cast;
 using std::shared_ptr;
@@ -208,10 +208,11 @@ namespace {
             unique_ptr<row> result = quince::make_unique<row>(&_database);
 
             for (uint32_t i = 0; i < _n_cols; i++) {
-                const optional<column_type> col_type(
-                    ! PQgetisnull(_pg_result, _current_row, i),
-                    get_column_type(_type_oids[i])
-                );
+                optional<column_type> col_type;
+                if(!PQgetisnull(_pg_result, _current_row, i)) {
+                    col_type.emplace(get_column_type(_type_oids[i]));
+                }
+                
                 const cell cell(
                     col_type,
                     PQfformat(_pg_result, i) == 1,

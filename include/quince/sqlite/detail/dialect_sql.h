@@ -36,7 +36,7 @@ public:
         const quince::binomen &table,
         const quince::abstract_mapper_base &value_mapper,
         const quince::abstract_mapper_base &key_mapper,
-        boost::optional<quince::column_id> generated_key,
+        std::optional<quince::column_id> generated_key,
         const std::vector<quince::foreign_spec> &
     ) override;
 

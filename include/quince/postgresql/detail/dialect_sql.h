@@ -49,7 +49,7 @@ public:
     write_add_columns(
         const quince::binomen &table,
         const quince::abstract_mapper_base &mapper,
-        boost::optional<quince::column_id> generated_key
+        std::optional<quince::column_id> generated_key
     ) override;
 
     virtual void
@@ -69,7 +69,7 @@ public:
     write_set_columns_types(
         const quince::binomen &table,
         const quince::abstract_mapper_base &,
-        boost::optional<quince::column_id> generated_key
+        std::optional<quince::column_id> generated_key
     ) override;
 
     void write_create_schema(const std::string &);

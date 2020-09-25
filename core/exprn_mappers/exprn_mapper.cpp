@@ -9,7 +9,7 @@
 #include <quince/detail/util.h>
 #include <quince/query.h>
 
-using boost::optional;
+using std::optional;
 using std::unique_ptr;
 using std::string;
 using std::vector;
@@ -19,7 +19,7 @@ namespace quince {
 
 optional<std::pair<const abstract_mapper_base *, bool>>
 abstract_expressionist::dissect_as_order_specification() const {
-    return boost::none;
+    return std::nullopt;
 }
 
 vector<const abstract_mapper_base *>
@@ -46,8 +46,8 @@ exprn_mapper_base::imports() const {
 }
 
 exprn_mapper_base::exprn_mapper_base(unique_ptr<const abstract_expressionist> e) :
-    abstract_mapper_base(boost::none),
-    column_mapper(boost::none),
+    abstract_mapper_base(std::nullopt),
+    column_mapper(std::nullopt),
     _expressionist(&own(e))
 {}
 

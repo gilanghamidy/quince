@@ -22,16 +22,16 @@ public:
         return _value == that._value;
     }
 
-    void clear()            { _value = boost::none; }
+    void clear()            { _value = std::nullopt; }
     void assign(int64_t v)  { _value = v; }
     bool has_value() const  { return bool(_value); }
     int64_t value() const   { return *_value; }
 
-    boost::optional<serial> to_optional() const {
+    std::optional<serial> to_optional() const {
         if (has_value())
             return *this;
         else
-            return boost::none;
+            return std::nullopt;
     }
 
     friend std::ostream &
@@ -42,7 +42,7 @@ public:
     }
 
 private:
-    boost::optional<int64_t> _value;
+    std::optional<int64_t> _value;
 };
 
 }

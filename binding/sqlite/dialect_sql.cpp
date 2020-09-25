@@ -12,7 +12,7 @@
 #include <quince/sqlite/detail/dialect_sql.h>
 
 using namespace quince;
-using boost::optional;
+using std::optional;
 using std::string;
 using std::to_string;
 using std::unique_ptr;
